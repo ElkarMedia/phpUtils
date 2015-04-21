@@ -13,15 +13,16 @@
 	    return null;
 	}
 
-	function addRootToImages($text) {
+	function addRootToImages($text,$rootName) {
 		require_once('simple_html_dom.php');
+		$rootName = "/".$rootName."/";
 		if ($text == null || trim($text) == "") {
 			return "";
 		}
 		$html = str_get_html($text);
 		for ($x = 0; $x < sizeof($html->find('img')); $x++) {
 			$img = $html->find('img', $x);
-			$img->src = "http://".$_SERVER['HTTP_HOST']."/astigarragajoomla/".$img->src;
+			$img->src = "http://".$_SERVER['HTTP_HOST'].$rootName.$img->src;
 		}
 		return $html->save();
 	}
