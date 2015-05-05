@@ -27,6 +27,19 @@
 		return $html->save();
 	}
 
+	function delete_first_image($html) {
+		require_once('simple_html_dom.php');
+	    if ($html == null || trim($html) == "") {
+			return "";
+		}
+	    $post_html = str_get_html($html);
+	    $first_img = $post_html->find('img', 0);
+	    if($first_img !== null) {
+	        $first_img->outertext = '';
+	    }
+	    return $post_html->save();
+	}
+
 	function extracto ( $contenido, $cantidadPalabras ) {
 		$contenido = str_replace("&nbsp;","",$contenido);
 		$contenido = explode(' ', $contenido);
